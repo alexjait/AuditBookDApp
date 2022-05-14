@@ -16,5 +16,4 @@ Copy AuditBook.json from AuditBookContract\artifacts\contracts\AuditBook.sol and
 
 ## App.js
 
-Paste de contract address here
-const contractAddress = 'THE CONTRACT ADDRESS FROM AuditBookContract'; 
+Paste de contract address here: const contractAddress = 'THE CONTRACT ADDRESS FROM AuditBookContract'; 
