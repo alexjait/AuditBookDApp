@@ -34,7 +34,7 @@
     @apply bg-indigo-500 px-5 py-3 mt-5 rounded-lg text-slate-100 font-bold
   }
 
-  .bank-owner-section{
+  .owner-section{
     @apply bg-indigo-900 bg-opacity-60 text-white w-4/5 mx-auto border-2 rounded-xl border-indigo-500 mb-10
   }
 

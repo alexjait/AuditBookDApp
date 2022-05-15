@@ -35,7 +35,7 @@ function App() {
   const [approvedAuditableCompaniesList, setApprovedAuditableCompaniesList] = useState(null);
   const [auditableCompanySubmittedAuditsList, setAuditableCompanySubmittedAuditsList] = useState(null);
 
-  const contractAddress = '0x73511669fd4dE447feD18BB79bAFeAC93aB7F31f';
+  const contractAddress = '0xb09da8a5B236fE0295A345035287e80bb0008290';
   const contractABI = abi.abi;
 
   var provider;
@@ -69,7 +69,7 @@ function App() {
         setCustomerAddress(account);
         console.log("Account Connected: ", account);
       } else {
-        setError("Please install a MetaMask wallet to use our bank.");
+        setError("Please install a MetaMask wallet to use our dapp.");
         console.log("No Metamask detected");
       }
     } catch (error) {
@@ -425,7 +425,7 @@ function App() {
       </section>
       {
         isAuditBookOwner && (
-          <section className="bank-owner-section">
+          <section className="owner-section">
             <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Audit Book Panel</h2>
             <div className="p-10">
               <form className="form-style">
@@ -446,7 +446,7 @@ function App() {
             </div>
               {
                 auditCompaniesList !== null && auditCompaniesList.length > 0 && (
-                  <div className="bank-owner-section">
+                  <div className="owner-section">
                     <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Audit Companies</h2>
                     <div className="p-10">
                       <ul>
@@ -488,7 +488,7 @@ function App() {
               }
               {
                 auditableCompaniesList !== null && auditableCompaniesList.length > 0 && (
-                  <div className="bank-owner-section">
+                  <div className="owner-section">
                     <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Auditable Companies</h2>
                     <div className="p-10">
                       <ul>
@@ -533,7 +533,7 @@ function App() {
       }
       {
         !isRegisteredAsAuditCompany && (
-          <section className="bank-owner-section">
+          <section className="owner-section">
             <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Audit Company - Request Admision</h2>
             <div className="p-10">
               <form className="form-style">
@@ -557,13 +557,13 @@ function App() {
       }
       {
         isRegisteredAsAuditCompany && (
-          <section className="bank-owner-section">
+          <section className="owner-section">
             <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Audit company name: {inputValue.auditCompanyName} - {StateTypeEnum[auditCompanyCurrentState]}</h2>
             
             {
               approvedAuditableCompaniesList !== null && approvedAuditableCompaniesList.length > 0 && auditCompanyCurrentState === STATE_APPROVED && (
                 <div className="mt-10">
-                  <div className="bank-owner-section">
+                  <div className="owner-section">
                     <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Submit Audit</h2>
                       <div>
                         <div className="p-2">
@@ -603,7 +603,7 @@ function App() {
       }
       {
         !isRegisteredAsAuditableCompany && (
-          <section className="bank-owner-section">
+          <section className="owner-section">
             <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Auditable Company - Request Admision</h2>
             <div className="p-10">
               <form className="form-style">
@@ -627,11 +627,11 @@ function App() {
       }
       {
         isRegisteredAsAuditableCompany && (
-          <section className="bank-owner-section">
+          <section className="owner-section">
             <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Auditable company name: {inputValue.auditableCompanyName} - {StateTypeEnum[auditableCompanyCurrentState]}</h2>
               {
                 auditableCompanySubmittedAuditsList !== null && auditableCompanySubmittedAuditsList.length > 0 && auditableCompanyCurrentState !== null && auditableCompanyCurrentState === STATE_APPROVED && (
-                  <div className="bank-owner-section mt-10">
+                  <div className="owner-section mt-10">
                     <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Auditable Companies</h2>
                     <div className="p-2">
                       <table className="table-auto border-collapse border border-slate-400">
