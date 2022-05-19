@@ -35,7 +35,7 @@ function App() {
   const [approvedAuditableCompaniesList, setApprovedAuditableCompaniesList] = useState(null);
   const [auditableCompanySubmittedAuditsList, setAuditableCompanySubmittedAuditsList] = useState(null);
 
-  const contractAddress = '0xb09da8a5B236fE0295A345035287e80bb0008290';
+  const contractAddress = '0xA39ad940F2a8Dd2E4ACBEdBEb17017c3727A1CFC';
   const contractABI = abi.abi;
 
   var provider;
@@ -114,13 +114,20 @@ function App() {
         if (isAuditBookOwner) {
           let auditableCompaniesList = await auditBookContract.getAuditableCompanies();
           setAuditableCompaniesList(auditableCompaniesList);
-
-          let approvedAuditableCompaniesList = await auditBookContract.getApprovedAuditableCompanies();
-          setApprovedAuditableCompaniesList(approvedAuditableCompaniesList);
         } else {
           setAuditableCompaniesList(null);
-          setApprovedAuditableCompaniesList(null);
         }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getApprovedAuditableCompaniesList = async () => {
+    try {
+      if (checkMetaMask()) {
+        let approvedAuditableCompaniesList = await auditBookContract.getApprovedAuditableCompanies();
+        setApprovedAuditableCompaniesList(approvedAuditableCompaniesList);
       }
     } catch (error) {
       console.log(error)
@@ -199,6 +206,7 @@ function App() {
         await txn.wait();
         console.log('Finish approving process ...');
         getAuditableCompaniesList();
+        getApprovedAuditableCompaniesList();
         setAuditableCompanyCurrentState(STATE_APPROVED);
       }
     } catch (error) {
@@ -214,6 +222,7 @@ function App() {
         await txn.wait();
         console.log('Finish Rejecting process ...');
         getAuditableCompaniesList();
+        getApprovedAuditableCompaniesList();
         setAuditableCompanyCurrentState(STATE_REJECTED);
       }
     } catch (error) {
@@ -341,12 +350,8 @@ function App() {
   const getAuditableCompanySubmittedAuditsList = async () => {
     try {
       if (checkMetaMask()) {
-        if (isAuditBookOwner) {
-          let audits = await auditBookContract.getAuditableCompanySubmittedAudits();
-          setAuditableCompanySubmittedAuditsList(audits);
-        } else {
-          setAuditableCompanySubmittedAuditsList(null);
-        }
+        let audits = await auditBookContract.getAuditableCompanySubmittedAudits();
+        setAuditableCompanySubmittedAuditsList(audits);
       }
     } catch (error) {
       console.log(error)
@@ -400,6 +405,7 @@ function App() {
   useEffect(() => {
     getAuditCompaniesList();
     getAuditableCompaniesList();
+    getApprovedAuditableCompaniesList();
   }, [isWalletConnected, isAuditBookOwner]);
 
   return (
@@ -559,7 +565,6 @@ function App() {
         isRegisteredAsAuditCompany && (
           <section className="owner-section">
             <h2 className="text-xl border-b-2 border-indigo-500 px-10 py-4 font-bold">Audit company name: {inputValue.auditCompanyName} - {StateTypeEnum[auditCompanyCurrentState]}</h2>
-            
             {
               approvedAuditableCompaniesList !== null && approvedAuditableCompaniesList.length > 0 && auditCompanyCurrentState === STATE_APPROVED && (
                 <div className="mt-10">
@@ -669,7 +674,7 @@ function App() {
                               </tr>
                           })}
                         </tbody>
-                        </table>
+                      </table>
                     </div>
                   </div>
                 )
